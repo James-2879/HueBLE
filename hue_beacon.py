@@ -2,8 +2,8 @@ build_number = 16032023
 
 #-------------------------------- User Config ---------------------------------
 
-bridge_address = "192.168.0.6"
-transmitter_address = "ED:7E:B6:76:9C:0C"
+bridge_address = None
+transmitter_address = None # null instead?
 connection_timeout = 4 #seconds
 lock_machine = False
 rssi_mode = True
@@ -116,11 +116,18 @@ print(colored("Latest versions and documentation available at", "dark_grey"), "h
 
 ### Script ###
 
+# briefly check the required info has been supplied
+# this doesn't work
+if bridge_address is None | transmitter_address is None:
+    print("Edit the 'User Config' section of hue_beacon.py with the required information.")
+    raise SystemExit
+
 # connect to Hue API
 print("\nPhilips Hue API connection status:")
 try:
     api.load_existing()
 except BaseException:
+    input("Press the pairing button the Hue bridge, then press 'Enter' to continue...")
     api.create_new_user(bridge_address)
     api.print_debug_info()
     api.save_api_key()
