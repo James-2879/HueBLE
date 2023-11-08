@@ -1,6 +1,6 @@
 # Hue Beacon
 
-https://github.com/James-2879/hue-beacon
+https://github.com/James-2879/HueBLE
 
 ## Overview
 
